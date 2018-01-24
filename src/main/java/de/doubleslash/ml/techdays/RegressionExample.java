@@ -37,7 +37,7 @@ public class RegressionExample {
 
 	private static LinearRegressionModel getTrainedModel(SparkSession spark, Dataset<Row> trainingData) {
 		// Setup the model
-		LinearRegression lr = new LinearRegression().setMaxIter(10).setRegParam(0.3);
+		LinearRegression lr = new LinearRegression().setMaxIter(10);
 
 		// Fit the model.
 		LinearRegressionModel lrModel = lr.fit(trainingData);
@@ -46,6 +46,7 @@ public class RegressionExample {
 
 	private static void printModelData(Dataset<Row> trainingData, LinearRegressionModel lrModel) {
 		// Print input data
+		System.out.println("Training data:");
 		trainingData.show(false);
 
 		// Print the coefficients and intercept for linear regression.

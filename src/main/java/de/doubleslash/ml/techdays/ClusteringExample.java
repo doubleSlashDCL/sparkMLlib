@@ -33,10 +33,6 @@ public class ClusteringExample {
 
 		// Read data from disk
 		Dataset<Row> trainingData = spark.read().format("libsvm").load("data/clustering.txt");
-		trainingData.show(false);
-
-		// Initialize Normalizer
-		normalizer = new Normalizer().setInputCol("features").setOutputCol("normFeatures").setP(1.0);
 
 		// Normalize trainingData
 		KMeansModel normalizedTrainingModel = getNormalizedKMeansModel(trainingData);
@@ -54,6 +50,10 @@ public class ClusteringExample {
 	}
 
 	private static KMeansModel getNormalizedKMeansModel(Dataset<Row> dataset) {
+		// Initialize Normalizer
+		normalizer = new Normalizer().setInputCol("features").setOutputCol("normFeatures").setP(1.0);
+
+		// Normalize training data
 		Dataset<Row> normalizedDataset = normalizer.transform(dataset);
 		normalizedDataset.show(false);
 		KMeans kmeans = new KMeans().setK(2).setMaxIter(50).setFeaturesCol("normFeatures");

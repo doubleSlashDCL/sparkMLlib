@@ -39,7 +39,7 @@ public class ClassificationExample {
 
 	private static LinearSVCModel getSVCModel(Dataset<Row> training) {
 		// Set parameter for Support Vector Machine
-		LinearSVC lsvc = new LinearSVC().setMaxIter(10).setRegParam(0.1);
+		LinearSVC lsvc = new LinearSVC().setMaxIter(10);
 		// Fit the model
 		LinearSVCModel lsvcModel = lsvc.fit(training);
 
